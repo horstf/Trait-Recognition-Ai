@@ -1,2 +1,3 @@
 # Trait-Recognition-Ai
-a face filter to use with the instagram app
+
+A face filter to use with the instagram app, that acts like a labeling algorithm but only displays rather unwanted personality traits or labels. You can try it out [here](https://www.instagram.com/a/r/?effect_id=203233557696059).
