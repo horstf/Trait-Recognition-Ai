@@ -8,11 +8,12 @@ const FaceTracking = require('FaceTracking')
 const names = ['creep', 'stalker', 'loner', 'weirdo', 'sad', 'social media addict', 'insecure', 'jealous', 'self sabotaging', 'anger problem', 'anxious', 'narcissist', 'attention seeker', 'inhibited', 'cautious', 'skeptic', 'not ok', 'distant', 'misanthrope', 'naive', 'disillusioned',
 'hopeless'];
 
-async function newDisp(label, confidence) {
-  label.text = Reactive.val(names[Math.floor(Random.random()*names.length)]);
-  confidence.text = Reactive.val(Math.round(Random.random()*10000)/100+'%');
-  Diagnostics.log("new trait: " + label.text.pinLastValue() + 
-    ", " + confidence.text.pinLastValue());
+async function newDisp(label) {
+  let prediction = names[Math.floor(Random.random()*names.length)];
+  let confidence = Math.round(Random.random()*10000)/100+'%';
+  label.text = Reactive.val(prediction + '\n' + confidence);
+  Diagnostics.log("new trait: " + prediction + 
+    ", " + confidence);
 }
 
 
@@ -28,19 +29,20 @@ async function mapFace(face) {
   canvas.transform.z = face.cameraTransform.z
   canvas.visible = face.isTracked
 
+
   //make new prediction when face visibility changes
   
   face.isTracked.monitor().subscribe(function() {
-    newDisp(label, confidence);
+    newDisp(label);
   });
 
   //make new prediction on tap
   TouchGestures.onTap().subscribe(function() {
-    newDisp(label, confidence);
+    newDisp(label);
   });
 
   //make first prediction
-  newDisp(label, confidence);
+  newDisp(label);
 };
 
 //map first face
