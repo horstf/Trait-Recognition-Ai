@@ -37,7 +37,7 @@ async function mapFace(i) {
   //map face coordinates to canvas
   canvas.transform.x = face.cameraTransform.x;
   canvas.transform.y = face.cameraTransform.y;
-  canvas.transform.z = face.cameraTransform.z;
+  canvas.transform.z = Reactive.sub(face.cameraTransform.z, -0.6);
   canvas.hidden = Reactive.not(face.isTracked);
 
   //make new prediction when the face becomes visible
